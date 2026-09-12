@@ -1,0 +1,113 @@
+{
+  "name": "Raffle",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "string"
+    },
+    "short_description": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "prize_title": {
+      "type": "string"
+    },
+    "prize_description": {
+      "type": "string"
+    },
+    "prize_image": {
+      "type": "string"
+    },
+    "additional_images": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "UPCOMING",
+        "ACTIVE",
+        "CLOSED",
+        "DRAWN",
+        "CANCELLED"
+      ],
+      "default": "DRAFT"
+    },
+    "winner_count": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 1
+    },
+    "rules": {
+      "type": "string"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "published_by": {
+      "type": "string"
+    },
+    "created_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "slug",
+    "status"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.status": {
+            "$ne": "DRAFT"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        },
+        {
+          "user_condition": {
+            "role": "dev"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "service"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "service"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "service"
+      }
+    }
+  }
+}

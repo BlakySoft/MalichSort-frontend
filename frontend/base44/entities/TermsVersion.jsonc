@@ -1,0 +1,62 @@
+{
+  "name": "TermsVersion",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "published_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "active": {
+      "type": "boolean",
+      "default": false
+    },
+    "created_by": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "title",
+    "content",
+    "active",
+    "created_by"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.active": true
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "service"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "service"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "service"
+      }
+    }
+  }
+}

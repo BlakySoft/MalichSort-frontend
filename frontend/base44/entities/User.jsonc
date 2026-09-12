@@ -1,0 +1,34 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "user",
+        "admin",
+        "dev"
+      ],
+      "default": "user",
+      "description": "Rol interno asignado exclusivamente por operaciones autorizadas"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "cuil": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "locality": {
+      "type": "string"
+    },
+    "cvu_cbu": {
+      "type": "string"
+    }
+  }
+}

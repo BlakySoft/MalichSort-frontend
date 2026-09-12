@@ -1,0 +1,56 @@
+{
+  "name": "TermsAcceptance",
+  "type": "object",
+  "properties": {
+    "user_id": {
+      "type": "string"
+    },
+    "terms_version_id": {
+      "type": "string"
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "ip_address": {
+      "type": "string"
+    },
+    "user_agent": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "user_id",
+    "terms_version_id",
+    "accepted_at"
+  ],
+  "rls": {
+    "read": {
+      "$or": [
+        {
+          "data.user_id": "{{user.id}}"
+        },
+        {
+          "user_condition": {
+            "role": "admin"
+          }
+        }
+      ]
+    },
+    "create": {
+      "user_condition": {
+        "role": "service"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "service"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "service"
+      }
+    }
+  }
+}
